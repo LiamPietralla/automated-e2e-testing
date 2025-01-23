@@ -1,0 +1,16 @@
+﻿@model E2ETesting.Models.HomeViewModel;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1>Current Count: @Model.Count</h1>
+    <form method="post" asp-action="Increment">
+        <input type="hidden" asp-for="Count" value="@Model.Count" />
+        <button type="submit">Increment</button>
+    </form>
+    <form method="post" asp-action="Decrement">
+        <input type="hidden" asp-for="Count" value="@Model.Count" />
+        <button type="submit">Decrement</button>
+    </form>
+</div>

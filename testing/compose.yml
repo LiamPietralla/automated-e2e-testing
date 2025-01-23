@@ -1,0 +1,15 @@
+name: e2e-testing
+
+services:
+  app:
+    build:
+      context: ../src
+      dockerfile: ../src/Dockerfile
+    restart: unless-stopped
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - e2e-testing
+  
+networks:
+  e2e-testing:
