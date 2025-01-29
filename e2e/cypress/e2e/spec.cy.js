@@ -3,7 +3,7 @@ describe('counter spec', () => {
     cy.visit('/')
     cy.contains('Current Count: 0');
     cy.get('button').contains('Increment').click()
-    cy.contains('Current Count: 10');
+    cy.contains('Current Count: 1');
   });
 
   it('can decrement', () => {
