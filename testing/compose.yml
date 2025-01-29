@@ -8,6 +8,8 @@ services:
     restart: unless-stopped
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "8080:8080"
     networks:
       - e2e-testing
   
