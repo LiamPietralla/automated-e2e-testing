@@ -16,19 +16,19 @@ jobs:
       - name: Start app for e2e testing
         run: docker compose -f testing/compose.yml up -d --build
 
-      - name: Install Dependencies
-        run: npm install
-        working-directory: ./e2e
+      # - name: Install Dependencies
+      #   run: npm install
+      #   working-directory: ./e2e
 
       - name: Run e2e Tests (Cypress)
         uses: cypress-io/github-action@v6
         with:
+          working-directory: ./e2e
           browser: firefox
           wait-on: http://localhost:8080
-          config-file: ./e2e/cypress.json
-          project: ./e2e
+          # config-file: ./e2e/cypress.json
+          # project: ./e2e
           config: baseUrl=http://localhost:8080,video=false,screenshotOnRunFailure=false
-          install: false
 
       - name: Stop app after e2e testing
         if: always()
