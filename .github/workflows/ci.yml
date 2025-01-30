@@ -13,8 +13,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Run e2e tests
-        run: | 
-          docker compose -f testing/compose.yml up -d --build
-          docker run --rm -v $(pwd)/e2e:/app -w /app --network=e2e-testing_e2e-testing --entrypoint cypress cypress/included:12.13.0 run -b firefox --config baseUrl=http://app:8080,video=false,screenshotOnRunFailure=false
-          docker compose -f testing/compose.yml down
+      - name: Start app for e2e testing
+        run: docker compose -f testing/compose.yml up -d --build
+
+      - name: Run e2e Tests (Cypress)
+        uses: cypress-io/github-action@v6
+        with:
+          browser: firefox
+          wait-on: http://localhost:8080
+          config-file: e2e/cypress.json
+          config: baseUrl=http://localhost:8080,video=false,screenshotOnRunFailure=false
+
+      - name: Stop app after e2e testing
+        if: always()
+        run: docker compose -f testing/compose.yml down
