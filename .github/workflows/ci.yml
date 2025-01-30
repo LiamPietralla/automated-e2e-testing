@@ -21,7 +21,8 @@ jobs:
         with:
           browser: firefox
           wait-on: http://localhost:8080
-          config-file: e2e/cypress.json
+          #config-file: e2e/cypress.json
+          project: e2e
           config: baseUrl=http://localhost:8080,video=false,screenshotOnRunFailure=false
 
       - name: Stop app after e2e testing
